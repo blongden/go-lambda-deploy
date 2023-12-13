@@ -52,5 +52,5 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: eu-west-2
 
-        - name: Upload Zip
-          run: aws lambda update-function-code --function-name ${{matrix.lambda-name}} --zip-file fileb://deploy.zip
+        - name: Deploy Terraform
+          run: terraform apply -auto-approve
