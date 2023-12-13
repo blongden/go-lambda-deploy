@@ -11,7 +11,7 @@ import (
 func TestHandler(t *testing.T) {
 	req, _ := json.Marshal(MyEvent{Name: "golang"})
 	event := events.APIGatewayProxyRequest{Body: string(req)}
-	message, _ := HandleRequest(context.Background(), &event)
+	message, _ := HandleRequest(context.Background(), event)
 
 	if message.Body != "Hello, golang!" {
 		t.Errorf("Unexpected output: %q", message.Body)
@@ -21,7 +21,7 @@ func TestHandler(t *testing.T) {
 func TestHandlerDefault(t *testing.T) {
 	req, _ := json.Marshal(MyEvent{})
 	event := events.APIGatewayProxyRequest{Body: string(req)}
-	message, _ := HandleRequest(context.Background(), &event)
+	message, _ := HandleRequest(context.Background(), event)
 
 	if message.Body != "Hello, world!" {
 		t.Errorf("Unexpected output: %q", message.Body)
