@@ -5,6 +5,11 @@ terraform {
       version = "~> 4.0"
     }
   }
+  backend "s3" {
+    bucket = "tfstate-bl-lambda"
+    key = "terraform"
+    region = "eu-west-2"
+  }
 }
 
 provider "aws" {
@@ -68,6 +73,7 @@ resource "aws_lambda_function" "my_function" {
   handler = "bootstrap"
   runtime = "provided.al2"
   architectures = ["arm64"]
+  source_code_hash = "${filebase64sha256("deploy.zip")}"
 }
 
 resource "aws_cloudwatch_log_group" "my_function" {
