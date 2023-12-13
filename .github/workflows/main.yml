@@ -37,7 +37,7 @@ jobs:
           uses: test-summary/action@v2
           if: ${{ always() }}
           with:
-            path: report.xml
+            paths: report.xml
 
         - name: Build
           run: GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o ${{matrix.binary-name}} -v main.go
