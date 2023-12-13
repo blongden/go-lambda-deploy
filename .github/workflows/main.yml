@@ -7,6 +7,7 @@ jobs:
       strategy:
         matrix:
           lambda-name: [my-go-function]
+          binary-name: [bootstrap]
       steps:
         - uses: actions/checkout@v3
         - name: Set up Go
@@ -14,9 +15,9 @@ jobs:
           with:
             go-version: 1.21
         - name: Build
-          run: GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -v main.go
+          run: GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o ${{matrix.binary-name}} -v main.go
         - name: Zip
-          run: zip -j deploy.zip main
+          run: zip -j deploy.zip ${{matrix.binary-name}}
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4
           with:
