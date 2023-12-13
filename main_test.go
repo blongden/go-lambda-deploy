@@ -11,7 +11,7 @@ func TestHandler(t *testing.T) {
 
 	message, _ := HandleRequest(ctx, &event)
 
-	if *message != "Goodbye, world!" {
+	if *message != "Hello, world!" {
 		t.Errorf("Unexpected output: %q", *message)
 	}
 }
