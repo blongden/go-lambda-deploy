@@ -19,14 +19,14 @@ type Response struct {
 	IsBase64Encoded bool   `json:"isBase64Encoded"`
 }
 
-func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	req := MyEvent{}
 
 	if event.Body != "" {
 		err := json.Unmarshal([]byte(event.Body), &req)
 
 		if err != nil {
-			return &events.APIGatewayProxyResponse{
+			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
 				Body:       "Unable to parse JSON body",
 			}, nil
@@ -42,7 +42,7 @@ func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (*e
 		Body:       fmt.Sprintf("Hello, %s!", req.Name),
 	}
 
-	return &response, nil
+	return response, nil
 }
 
 func main() {
