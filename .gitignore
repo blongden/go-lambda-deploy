@@ -1,3 +1,4 @@
 hello_lambda
 bootstrap
 deploy.zip
+.terraform*
