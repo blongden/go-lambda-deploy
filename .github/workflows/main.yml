@@ -14,7 +14,7 @@ jobs:
           with:
             go-version: 1.21
         - name: Build
-          run: go build -v main.go
+          run: GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -v main.go
         - name: Zip
           run: zip -j deploy.zip main
         - name: Configure AWS Credentials
