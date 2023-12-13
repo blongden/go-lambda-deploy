@@ -31,7 +31,7 @@ jobs:
         - name: Test with Go
           run: |
             go install github.com/jstemmer/go-junit-report@latest
-            go test -v ./.. | go-junit-report -set-exit-code > report.xml
+            go test -v | go-junit-report -set-exit-code > report.xml
         
         - name: Upload Go test results
           uses: test-summary/action@v2
