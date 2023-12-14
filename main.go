@@ -13,19 +13,21 @@ type MyEvent struct {
 	Name string `json:"name"`
 }
 
+func parseMyEventJson(req *MyEvent, body string) error {
+	if body != "" {
+		err := json.Unmarshal([]byte(body), &req)
+
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	req := MyEvent{}
 
-	if event.Body != "" {
-		err := json.Unmarshal([]byte(event.Body), &req)
-
-		if err != nil {
-			return events.APIGatewayProxyResponse{
-				StatusCode: 500,
-				Body:       "Unable to parse JSON body",
-			}, nil
-		}
-	}
+	parseMyEventJson(&req, event.Body)
 
 	if req.Name == "" {
 		req.Name = "world"
