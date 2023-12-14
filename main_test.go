@@ -13,7 +13,7 @@ func TestHandler(t *testing.T) {
 	event := events.APIGatewayProxyRequest{Body: string(req)}
 	message, _ := HandleRequest(context.Background(), event)
 
-	if message.Body != "Hello, golang!" {
+	if message.Body != "Goodbye, golang!" {
 		t.Errorf("Unexpected output: %q", message.Body)
 	}
 }
@@ -23,7 +23,7 @@ func TestHandlerDefault(t *testing.T) {
 	event := events.APIGatewayProxyRequest{Body: string(req)}
 	message, _ := HandleRequest(context.Background(), event)
 
-	if message.Body != "Hello, world!" {
+	if message.Body != "Goodbye, world!" {
 		t.Errorf("Unexpected output: %q", message.Body)
 	}
 }

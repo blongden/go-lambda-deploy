@@ -39,7 +39,7 @@ func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (ev
 
 	response := events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       fmt.Sprintf("Hello, %s!", req.Name),
+		Body:       fmt.Sprintf("Goodbye, %s!", req.Name),
 	}
 
 	return response, nil
