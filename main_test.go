@@ -10,7 +10,7 @@ import (
 )
 
 func checkGreeting(t *testing.T, body string, name string) {
-	if body != fmt.Sprintf("Hello, %s!", name) {
+	if body != fmt.Sprintf("Goodbye, %s!", name) {
 		t.Errorf("Unexpected output: %q", body)
 	}
 }
