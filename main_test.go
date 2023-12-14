@@ -3,19 +3,24 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 )
+
+func checkGreeting(t *testing.T, body string, name string) {
+	if body != fmt.Sprintf("Hello, %s!", name) {
+		t.Errorf("Unexpected output: %q", body)
+	}
+}
 
 func TestHandler(t *testing.T) {
 	req, _ := json.Marshal(MyEvent{Name: "golang"})
 	event := events.APIGatewayProxyRequest{Body: string(req)}
 	message, _ := HandleRequest(context.Background(), event)
 
-	if message.Body != "Goodbye, golang!" {
-		t.Errorf("Unexpected output: %q", message.Body)
-	}
+	checkGreeting(t, message.Body, "golang")
 }
 
 func TestHandlerDefault(t *testing.T) {
@@ -23,7 +28,5 @@ func TestHandlerDefault(t *testing.T) {
 	event := events.APIGatewayProxyRequest{Body: string(req)}
 	message, _ := HandleRequest(context.Background(), event)
 
-	if message.Body != "Goodbye, world!" {
-		t.Errorf("Unexpected output: %q", message.Body)
-	}
+	checkGreeting(t, message.Body, "world")
 }

@@ -13,12 +13,6 @@ type MyEvent struct {
 	Name string `json:"name"`
 }
 
-type Response struct {
-	StatusCode      int    `json:"statusCode"`
-	Body            string `json:"body"`
-	IsBase64Encoded bool   `json:"isBase64Encoded"`
-}
-
 func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	req := MyEvent{}
 
@@ -39,7 +33,7 @@ func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (ev
 
 	response := events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       fmt.Sprintf("Goodbye, %s!", req.Name),
+		Body:       fmt.Sprintf("Hello, %s!", req.Name),
 	}
 
 	return response, nil
